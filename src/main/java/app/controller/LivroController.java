@@ -1,5 +1,7 @@
 package app.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import app.entity.Biblioteca;
 import app.entity.Livro;
 import app.service.LivroService;
 
@@ -74,5 +78,16 @@ public class LivroController {
 			return new ResponseEntity<String>(": "+e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		
+	}
+	
+	@GetMapping("/listAll")
+	public ResponseEntity<List<Livro>> listAll() {
+		try {
+			List <Livro> lista = this.livroService.listAll();
+			return new ResponseEntity <>(lista, HttpStatus.OK);
+			
+		} catch (Exception e) {
+			return new ResponseEntity <>(null, HttpStatus.BAD_REQUEST);
+		}
 	}
 }

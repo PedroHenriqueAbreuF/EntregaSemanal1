@@ -1,5 +1,7 @@
 package app.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import app.entity.Autor;
+import app.entity.Biblioteca;
 import app.service.AutorService;
 
 @RestController
@@ -74,5 +77,16 @@ public class AutorController {
 			return new ResponseEntity<String>(": "+e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		
+	}
+	
+	@GetMapping("/listAll")
+	public ResponseEntity<List<Autor>> listAll() {
+		try {
+			List <Autor> lista = this.autorService.listAll();
+			return new ResponseEntity <>(lista, HttpStatus.OK);
+			
+		} catch (Exception e) {
+			return new ResponseEntity <>(null, HttpStatus.BAD_REQUEST);
+		}
 	}
 }
