@@ -1,5 +1,15 @@
 package app.entity;
 
-public class Editora {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+@AllArgsConstructor
+public class Editora {
+	int id;
+	String nome;
+	String endereco;
+	String telefone;
 }
